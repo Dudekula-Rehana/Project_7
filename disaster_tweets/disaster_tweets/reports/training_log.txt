@@ -1,0 +1,39 @@
+Rows loaded: 7613 | after dropping conflicting-label tweets: 7558 | after removing duplicate texts: 7485
+Train: 5988  Test: 1497  (disaster share train 0.426 / test 0.426)
+
+[1/4] 5-fold cross-validation of candidate models ...
+   Logistic Regression                      F1=0.7444
+   Multinomial Naive Bayes                  F1=0.7391
+   Linear SVM                               F1=0.7412
+   Random Forest                            F1=0.7454
+   Logistic Regression + extra features     F1=0.7450
+
+[2/4] Hyper-parameter tuning (GridSearchCV, scoring=F1) for: ['Random Forest', 'Logistic Regression']
+   Random Forest: best params {'clf__max_depth': None, 'clf__min_samples_leaf': 2}  CV F1 0.7454 -> 0.7468
+   Logistic Regression: best params {'clf__C': 5, 'tfidf__min_df': 1}  CV F1 0.7444 -> 0.7607
+   LR + extra features CV F1: 0.7604
+
+[3/4] Selected final model: Logistic Regression  (CV F1 0.7607)
+      Rule: highest CV F1; Logistic Regression preferred if within 0.005 (interpretable, gives probabilities).
+
+[4/4] Evaluating on the held-out test set ...
+              precision    recall  f1-score   support
+
+Not disaster       0.79      0.87      0.83       859
+    Disaster       0.80      0.69      0.74       638
+
+    accuracy                           0.79      1497
+   macro avg       0.80      0.78      0.79      1497
+weighted avg       0.80      0.79      0.79      1497
+
+Train vs CV vs Test F1: 0.9796 / 0.7607 / 0.7414
+
+Sanity check on hand-written tweets:
+   DISASTER      (0.90)  Forest fire near La Ronge Sask. Canada
+   DISASTER      (0.96)  Heavy rain causes flash flooding of streets, residents evacuated
+   not disaster  (0.23)  That new song is fire, absolutely killing it tonight
+   DISASTER      (0.57)  I'm gonna crash and burn on this exam tomorrow
+   not disaster  (0.23)  Just had a great pizza for lunch
+   DISASTER      (0.95)  Earthquake of magnitude 6.1 hits near the coast, tsunami warning issued
+
+Saved: models/disaster_pipeline.joblib, models/metrics.json  (total time 283s)

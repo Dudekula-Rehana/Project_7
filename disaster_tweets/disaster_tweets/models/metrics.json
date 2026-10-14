@@ -1,0 +1,44 @@
+{
+  "final_model": "Logistic Regression",
+  "selection_rule": "Highest 5-fold CV F1 on training data; Logistic Regression preferred if within 0.005.",
+  "n_train": 5988,
+  "n_test": 1497,
+  "cv_f1_selected": 0.760695833422792,
+  "train_metrics": {
+    "accuracy": 0.9827989311957248,
+    "precision": 0.9907741676694746,
+    "recall": 0.9686274509803922,
+    "f1": 0.9795756494150307,
+    "roc_auc": 0.9968641709156031,
+    "pr_auc": 0.9955510735817833
+  },
+  "test_metrics": {
+    "accuracy": 0.7949231796927188,
+    "precision": 0.8014571948998178,
+    "recall": 0.6896551724137931,
+    "f1": 0.7413647851727043,
+    "roc_auc": 0.846276380277424,
+    "pr_auc": 0.8382622402066096
+  },
+  "confusion_matrix_test": [
+    [
+      750,
+      109
+    ],
+    [
+      198,
+      440
+    ]
+  ],
+  "best_params": {
+    "Random Forest": {
+      "clf__max_depth": null,
+      "clf__min_samples_leaf": 2
+    },
+    "Logistic Regression": {
+      "clf__C": 5,
+      "tfidf__min_df": 1
+    }
+  },
+  "has_predict_proba": true
+}
